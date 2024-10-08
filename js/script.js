@@ -84,7 +84,7 @@ showLoading("#main-content");
 $ajaxUtils.sendGetRequest(
   homeHtml,
   function (responseText) {
-    document.querySelector("#main-content).innerHTML = responseText;
+    document.querySelector("#main-content").innerHTML = responseText;
   },              // ***** <---- TODO: STEP 1: Substitute [...] ******
   false
 );
@@ -96,6 +96,18 @@ $ajaxUtils.sendGetRequest(
     showLoading("#main-content");
     $ajaxUtils.sendGetRequest(allCategoriesUrl, buildAndShowCategoriesHTML);
   };
+
+ // Load the menu items view
+  // 'categoryShort' is a short_name for a category
+  dc.loadMenuItems = function (categoryShort) {
+    showLoading("#main-content");
+    $ajaxUtils.sendGetRequest(
+      menuItemsUrl + categoryShort + ".json",
+      buildAndShowMenuItemsHTML
+    );
+  };
+
+  
 
 // Builds HTML for the home page based on categories array
 // returned from the server.
